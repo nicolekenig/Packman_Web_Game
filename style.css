@@ -1,20 +1,13 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
-*
-{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins',sans-serif;
-}
 body{
     font-family: calibri;
 }
+
 .packman-logo{
     display: block;
     margin-left: 0;
 }
 
-canvas{
+#info-canvas{
     position: absolute;
     top: 0px;
     left: 770px;
@@ -29,24 +22,28 @@ header{
     position: fixed;
     align-items: center;
     font-size: 20px;
-    top:25px;
+    top:20px;
     left:150px;
     width:100%;
     display: flex;
     transition: 0.6s;
-    padding:40px,100px;
+    /*padding-top: 10px;*/
+    /*padding-right: 100px;*/
+    /*padding:40px,100px;*/
+    color: antiquewhite;
+    font-family: calibri;
 }
 
-header  a
-{
+header a {
     position: relative;
     margin: 0 15px;
     text-decoration:none;
     color: #FFEE28;
     Letter-spacing: 2px;
-    font-weight: 500px;
+    font-weight: 500;
     transition: 0.6s;
     right: 10px;
+    font-family: calibri;
 }
 
 header a:hover{
@@ -71,77 +68,282 @@ header a:hover{
 /*    color: #000;*/
 /*}*/
 
-
-div h1, p{
-    color: antiquewhite;
-
-}
-
-/*Welcome, Register, Login basic style*/
-.divOption {
+/***Welcome, Register, Login basic style***/
+.main-div {
     padding: 15px 10px; /*box size*/
-    /*margin-left: 160px;*/
-    /*position: absolute;*/
+    margin-left: 160px;
+    position: absolute;
     /* Location in the box */
-    top: 0;
+    /*top: 130px;*/
     left: 40px;
     width: 1000px;
     height: 100px;
 
-    display: none; /* Hidden by default */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0); /* Fallback color */
+    visibility: hidden;
+    color: antiquewhite;
+    font-family: calibri;
+    /*display: none; !* Hidden by default *!*/
+    /*overflow: auto; !* Enable scroll if needed *!*/
+    /*background-color: rgb(0, 0, 0); !* Fallback color *!*/
 
-    text-align: center;
+    /*text-align: center;*/
+    /*color: gold;*/
 }
 
-
-.action-button:active {
+/***Menu***/
+.menu-button:active {
     transform: translate(0px, 5px);
     -webkit-transform: translate(0px, 5px);
     border-bottom: 1px solid;
+    color: antiquewhite;
+    font-family: calibri;
 }
 
-/*About style*/
-/* About Modal (background) */
-/*.divModel{
+/**welcome**/
+#welcome{
+    text-align: center;
+}
+.welcome-packman-logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:400px ;
+    height:144px;
+    top:0px;
+}
+.welcome-buttons{
+    color: black;
+    /*text-align: center;*/
+
+    /*display: inline-block;*/
+    font-size: 30px;
+    /*-webkit-transition-duration: 0.4s; !* Safari *!*/
+    /*transition-duration: 0.4s;*/
+    top:50%;
+
+    cursor: pointer;
+    position: relative;
+    padding:15px 32px;
+    border-radius: 3.75rem;
+    line-height: 2.5rem;
+    font-weight: 600;
+
+    border: 0.5px solid #012880;
+    background-image: linear-gradient(-180deg, #ffeb89 0%, #fff800 100%);
+    box-shadow: 5px 10px  1.25rem 0 rgba(22,75,195,0.50),
+    0 -0.25rem 1.5rem rgb(155, 132, 15) inset,
+    0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
+    0 0.25rem 0.5rem 0 rgb(207, 168, 70) inset;
+}
+.welcome-buttons::before {
+    content: "";
+    display: block;
+    height: 0.25rem;
+    position: absolute;
+    top: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 7.5rem);
+    background: #fff;
+    border-radius: 100%;
+
+    opacity: 0.7;
+    background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
+}
+
+.welcome-buttons::after {
+    content: "";
+    display: block;
+    height: 0.25rem;
+    position: absolute;
+    bottom: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 7.5rem);
+    background: #fff;
+    border-radius: 100%;
+
+    filter: blur(1px);
+    opacity: 0.05;
+    background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
+}
+
+/**register**/
+#register{
+    color: antiquewhite;
+    font-family: calibri;
+}
+#register  label,input{
+    display: block;
+}
+#register  input.text{
+    margin-bottom: 12px;
+    width: 95%;
+    padding: .4em;
+}
+
+#register  fieldset {
+    padding:0;
+    border:0;
+    margin-top:25px;
+}
+
+#register  h1 {
+    font-size: 1.2em;
+    margin: .6em 0;
+
+}
+
+#register  div#users-contain {
+    width: 350px;
+    margin: 20px 0;
+}
+
+#register  div#users-co ntain table {
+    margin: 1em 0;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#register  div#users-contain table td, div#users-contain table th {
+    border: 1px solid #eee;
+    padding: .6em 10px;
+    text-align: left;
+}
+
+#register  .ui-dialog .ui-state-error {
+    padding: .3em;
+}
+
+#register  .validateTips {
+    border: 1px solid transparent;
+    padding: 0.3em;
+}
+
+
+/***About, GameOver basic style****/
+/* background from:w3schools*/
+div.aboutModel{
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-   /* z-index: 1; /* Sit on top */
-   /* padding-top: 10px; /* Location of the box */
-    /*left: 0;
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
     top: 0;
     width: 100%; /* Full width */
-    /*height: 100%; /* Full height */
-    /*overflow: auto; /* Enable scroll if needed */
-    /*background-color: rgb(0,0,0); /* Fallback color */
-    /*background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-/*}*/
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    color: antiquewhite;
+    font-family: calibri;
 
-.about-content{
-    background-color:#023F4F;
-    /*margin: auto;*/
-    padding: 30px;
-    padding-top: 70px;
-    border: 5px solid #023F4F;
+}
+
+/**About**/
+/*from:w3schools*/
+div .about-content{
+    background-color:#F7FDE6;
+    margin: auto;
+    /*padding: 10px;*/
+    padding-left: 10px;
+    border: 5px solid #F7FDE6;
     border-radius: 5px;
     width: 60%;
-    font-family: 'Pacifico', cursive;
     font-size: 21px;
+    color: black;
+    font-family: calibri;
 }
-/* Close About Button */
-.closeSpan {
-    color: #aaaaaa;
+/*Close About Button  from:w3schools*/
+.aboutModel .about-content .closeSpan {
+    color:black;
     float: right;
-    font-size: 28px;
+    font-size: 30px;
     font-weight: bold;
+    font-family: 'Pacifico', cursive;
+
 }
 
-.closeSpan:hover,
-.closeSpan:focus {
-    color: #000;
+.aboutModel .about-content .closeSpan:hover,
+.aboutModel .about-content .closeSpan:focus {
+    color: lightslategray;
     text-decoration: none;
     cursor: pointer;
 }
+
+.dialog-form-body .register-button{
+    color: black;
+    /*text-align: center;*/
+
+    /*display: inline-block;*/
+    font-size: 30px;
+    /*-webkit-transition-duration: 0.4s; !* Safari *!*/
+    /*transition-duration: 0.4s;*/
+    top:50%;
+
+    cursor: pointer;
+    position: relative;
+    padding:15px 32px;
+    border-radius: 3.75rem;
+    line-height: 2.5rem;
+    font-weight: 600;
+
+    border: 0.5px solid #012880;
+    background-image: linear-gradient(-180deg, #ffeb89 0%, #fff800 100%);
+    box-shadow: 5px 10px  1.25rem 0 rgba(22,75,195,0.50),
+    0 -0.25rem 1.5rem rgb(155, 132, 15) inset,
+    0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
+    0 0.25rem 0.5rem 0 rgb(207, 168, 70) inset;
+}
+.dialog-form-body .register-button::before {
+    content: "";
+    display: block;
+    height: 0.25rem;
+    position: absolute;
+    top: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 7.5rem);
+    background: #fff;
+    border-radius: 100%;
+
+    opacity: 0.7;
+    background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
+}
+
+.dialog-form-body .register-button::after {
+    content: "";
+    display: block;
+    height: 0.25rem;
+    position: absolute;
+    bottom: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 7.5rem);
+    background: #fff;
+    border-radius: 100%;
+
+    filter: blur(1px);
+    opacity: 0.05;
+    background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
+}
+
+
+/***SETTINGS**/
+.settingOption{
+    color: blanchedalmond;
+    text-align: center;
+
+}
+
+.settingtable, .setting-input{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#game{
+    color: darkorange;
+}
+
 
 

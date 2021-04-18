@@ -17,13 +17,30 @@ function showDiv(divId){
     aboutDiv.style.visibility = 'hidden';
     var gameDiv = document.getElementById('game');
     gameDiv.style.visibility = 'hidden';
-    var welcomeDiv = document.getElementById('gameOver');
-    gameOver.style.visibility = 'hidden';
+    var gameOverDiv = document.getElementById('gameOver');
+    gameOverDiv.style.visibility = 'hidden';
 
     //show only the divID div
     var divToShow = document.getElementById(divId);
     divToShow.style.visibility = "visible";
 
+    if (divId == 'about') {
+            openAbout();
+    }
 
 
+
+
+}
+//
+// function showAboutModel(){
+//     var aboutModel = document.getElementById('about');
+//     aboutModel.style.visibility="visible";
+//     openAbout();
+// }
+
+
+function showSettings(){
+    var settingDiv = document.getElementById('settings');
+    settingDiv.style.visibility = "visible";
 }
