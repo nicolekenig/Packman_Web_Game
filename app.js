@@ -1,4 +1,3 @@
-var context;
 var shape = new Object();
 var board;
 var score;
@@ -6,12 +5,113 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+var ghostArr;
+var tmp_info_canvas;
 
-$(document).ready(function() {
-	context = canvas.getContext("2d");
-	Start();
-});
-function Start() {
+// $(document).ready(function() {
+// 	context = canvas.getContext("2d");
+// 	Start();
+// });
+var canvas_game = document.getElementById("game-canvas")
+var game_canvas_ctx = canvas_game.getContext("2d");
+
+var canves_info = document.getElementById("info-canvas")
+var info_canvas_ctx= canves_info.getContext("2d");
+
+
+
+// var life_pacman = document.getElementById("life_pacman");
+
+//TODO TRANSPERSITY !!
+function DrawLives() {
+	// var life_image = new Image();
+	// life_image.src = 'images/Pac-Man-Logo.jpg';
+	// life_image.src = 'images/life-pacman.png';
+	var life_image = document.getElementById("life-pacman");
+
+	for (var i=0; i<5; i++) {
+		info_canvas_ctx.drawImage(life_image, 10 + i* 50, 50, 50, 50);
+	}
+}
+
+function DrawGhosts() {
+	var icons_radius = 15;
+	var eye_radius = 2.5;
+	for (var k=0; k<ghostArr.length; k++) {
+		var center = new Object();
+		center.x = ghostArr[k].j * 2* icons_radius + icons_radius;
+		center.y = ghostArr[k].i* 2 * icons_radius + icons_radius;
+
+		game_canvas_ctx.beginPath();
+		var image = new Image();
+		image.src = "images/ghosts" + (k+1).toString() + ".png";
+		game_canvas_ctx.drawImage(image,center.x-icons_radius, center.y -icons_radius, 2* icons_radius ,2* icons_radius )
+	}
+
+}
+
+
+
+function DrawBaseOfInfoCanvas() {
+	canves_info.style.visibility="visible";
+	canves_info.width = 600;
+	canves_info.height = 120;
+	canves_info.style.left = "700px";
+	canves_info.style.top = "20px";
+	canves_info.style.position = "absolute";
+
+
+	info_canvas_ctx.fillStyle = "#E7DB50";
+	info_canvas_ctx.lineWidth="5px";
+	info_canvas_ctx.strokeStyle="#000000";
+	info_canvas_ctx.rect(0,0,canves_info.width,canves_info.height);
+	info_canvas_ctx.fill();
+	info_canvas_ctx.stroke();
+
+	 DrawLives();
+
+	//username
+	info_canvas_ctx.fillStyle = "#f1f1f1";
+	info_canvas_ctx.font =  '30px Pacifico';
+	info_canvas_ctx.textShadow = "2px -6px #D1B358";
+	if (typeof (username) !== "undefined")
+		info_canvas_ctx.fillText(username,10,35);
+
+	//lifes
+
+	//Time
+	info_canvas_ctx.fillStyle = "#f1f1f1";
+	info_canvas_ctx.font =  '30px Pacifico';
+	info_canvas_ctx.textShadow = "2px -6px #D1B358";
+	info_canvas_ctx.fillText("Time:",270,35);
+
+	//clock
+	info_canvas_ctx.fillStyle = "#f1f1f1";
+	info_canvas_ctx.font =  '30px Pacifico';
+	info_canvas_ctx.textShadow = "2px -6px #D1B358";
+	info_canvas_ctx.fillText(time_elapsed,280,90);
+
+
+	//Time
+	info_canvas_ctx.fillStyle = "#f1f1f1";
+	info_canvas_ctx.font =  '30px Pacifico';
+	info_canvas_ctx.textShadow = "2px -6px #D1B358";
+	info_canvas_ctx.fillText("Score:",370,35);
+
+	//clock
+	info_canvas_ctx.fillStyle = "#f1f1f1";
+	info_canvas_ctx.font =  '30px Pacifico';
+	info_canvas_ctx.textShadow = "2px -6px #D1B358";
+	info_canvas_ctx.fillText(score,380,90);
+
+	DrawLives();
+
+}
+
+DrawBaseOfInfoCanvas();
+
+
+function Start(){
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
@@ -81,23 +181,24 @@ function findRandomEmptyCell(board) {
 	return [i, j];
 }
 
+
 function GetKeyPressed() {
-	if (keysDown[38]) {
+	if (keysDown[upKey]) {
 		return 1;
 	}
-	if (keysDown[40]) {
+	if (keysDown[downKey]) {
 		return 2;
 	}
-	if (keysDown[37]) {
+	if (keysDown[leftKey]) {
 		return 3;
 	}
-	if (keysDown[39]) {
+	if (keysDown[rightKey]) {
 		return 4;
 	}
 }
 
 function Draw() {
-	canvas.width = canvas.width; //clean board
+	game_canvas_ctx.width = game_canvas_ctx.width; //clean board
 	lblScore.value = score;
 	lblTime.value = time_elapsed;
 	for (var i = 0; i < 10; i++) {
@@ -106,25 +207,25 @@ function Draw() {
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
 			if (board[i][j] == 2) {
-				context.beginPath();
-				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-				context.lineTo(center.x, center.y);
-				context.fillStyle = pac_color; //color
-				context.fill();
-				context.beginPath();
-				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
-				context.fillStyle = "black"; //color
-				context.fill();
+				game_canvas_ctx.beginPath();
+				game_canvas_ctx.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+				game_canvas_ctx.lineTo(center.x, center.y);
+				game_canvas_ctx.fillStyle = pac_color; //color
+				game_canvas_ctx.fill();
+				game_canvas_ctx.beginPath();
+				game_canvas_ctx.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+				game_canvas_ctx.fillStyle = "black"; //color
+				game_canvas_ctx.fill();
 			} else if (board[i][j] == 1) {
-				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = "black"; //color
-				context.fill();
+				game_canvas_ctx.beginPath();
+				game_canvas_ctx.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				game_canvas_ctx.fillStyle = "white"; //color
+				game_canvas_ctx.fill();
 			} else if (board[i][j] == 4) {
-				context.beginPath();
-				context.rect(center.x - 30, center.y - 30, 60, 60);
-				context.fillStyle = "grey"; //color
-				context.fill();
+				game_canvas_ctx.beginPath();
+				game_canvas_ctx.rect(center.x - 30, center.y - 30, 60, 60);
+				game_canvas_ctx.fillStyle = "grey"; //color
+				game_canvas_ctx.fill();
 			}
 		}
 	}
@@ -169,3 +270,5 @@ function UpdatePosition() {
 		Draw();
 	}
 }
+
+
