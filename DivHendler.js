@@ -1,6 +1,6 @@
-
 function openingPage(){
     showDiv('welcome');
+
 }
 /**
  * line:36, 42, 46-50

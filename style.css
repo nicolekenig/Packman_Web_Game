@@ -70,6 +70,7 @@ header .by:hover{
     left:27%;
     color: antiquewhite;
     font-family: calibri;
+    visibility: hidden;
 }
 
 /***Menu***/
@@ -329,14 +330,21 @@ table.settingtable, .setting-input{
 #bigPill_image,
 #win_image,
 #gameover_image,
-#boom_image,
-#bonus_image,
 #pacmanEaten,
-#nikud_zaz{
+#nikud_zaz
+{
     top: 115px;
     left: 400px;
     position: absolute;
     display: none;
+}
+
+#bigClock_image{
+    top: 50px;
+    left: 400px;
+    position: absolute;
+    display: none;
+    /*opacity: 0.5;*/
 }
 
 /***GAME OVER***/
@@ -356,7 +364,7 @@ table.settingtable, .setting-input{
     margin-top: 7%;
     padding: 30px;
     width: 35%;
-    border-radius: 5px;
+    border-radius: 30px;
 
 }
 .gameOver-content p{

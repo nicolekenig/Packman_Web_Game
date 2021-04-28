@@ -3,7 +3,6 @@ var moveScore = new Object();
 
 var board;
 var score;
-var pac_color ;
 var start_time;
 var time_elapsed;
 var ghostArr= new Array();
@@ -19,7 +18,6 @@ var canves_info = document.getElementById("info-canvas")
 var info_canvas_ctx= canves_info.getContext("2d");
 
 var points25, points15, points5;
-var points_board=[21,22,23];
 
 var interval_score;
 var interval;
@@ -29,12 +27,8 @@ var rows=21;
 var cols=21;
 var pac_color='#7FFF00'
 var pressed;
-// var life_pacman = document.getElementById("life_pacman");
 
 function DrawLives() {
-	// var life_image = new Image();
-	// life_image.src = 'images/Pac-Man-Logo.jpg';
-	// life_image.src = 'images/life-pacman.png';
 	var life_image = document.getElementById("life-pacman");
 
 	for (var i=0; i<lifes; i++) {
@@ -62,7 +56,6 @@ function DrawMoveScore() {
 		return;
 
 	var icons_radius = 15;
-	var eye_radius = 2.5;
 	var center = new Object();
 	center.x = moveScore.i * 2 * icons_radius + icons_radius;
 	center.y = moveScore.j * 2 * icons_radius + icons_radius;
@@ -72,6 +65,8 @@ function DrawMoveScore() {
 	img.src = "images/nikud_zaz.png";
 	game_canvas_ctx.drawImage(img, center.x - icons_radius, center.y - icons_radius, 2 * icons_radius, 2 * icons_radius)
 }
+
+
 
 
 function noGhostOnThisPoint(ghostLocationI, ghostLocationJ) {
@@ -101,9 +96,6 @@ function locateGhosts() {
 	}
 }
 
-/**
- * all
- */
 function DrawBaseOfInfoCanvas() {
 	canves_info.style.visibility="visible";
 	canves_info.width = 530;
@@ -113,11 +105,7 @@ function DrawBaseOfInfoCanvas() {
 	canves_info.style.position = "absolute";
 
 
-	// info_canvas_ctx.fillStyle = "#E7DB50";
 	info_canvas_ctx.fillStyle = "#C5B823";
-	// info_canvas_ctx.lineWidth="10px";
-	// info_canvas_ctx.strokeStyle = "#FF5733";
-	info_canvas_ctx.border-"2px solid #FF5733";
 	info_canvas_ctx.rect(0,0,canves_info.width,canves_info.height);
 	info_canvas_ctx.fill();
 	info_canvas_ctx.stroke();
@@ -239,9 +227,7 @@ function DrawBaseOfInfoCanvas() {
 
 
 }
-/**
- * line: 204, 221
- */
+
 function Start() {
 	DrawBaseOfInfoCanvas();
 	canves_info.style.visibility="visible";
@@ -272,7 +258,6 @@ function Start() {
 	score=0;
 	startSound();
 	var two_bunos_pills= 2;
-	var pacman_remain = 1;
 	for (var i = 0; i < cols; i++) {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
@@ -318,12 +303,6 @@ function Start() {
 						board[i][j] = 0;
 					}
 				}
-					// else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
-					// 	shape.i = i;
-					// 	shape.j = j;
-					// 	pacman_remain--;
-					// 	board[i][j] = 2;
-				// }
 				else if(randomNum < 0.2 && two_bunos_pills > 0 && (j != 3 || j != 6) ){
 					board[i][j] = 20;
 					two_bunos_pills--;
@@ -348,9 +327,10 @@ function Start() {
 			board[emptyCell[0]][emptyCell[1]] = points_board[random];
 		}
 	}
+	var emptyCell1 = findRandomEmptyCell(board);
+	board[emptyCell1[0]][emptyCell1[1]] = 30;
 
-	moveScore.j=10;
-	moveScore.i=10;
+
 
 	while (two_bunos_pills > 0) {
 		var emptyCell = findRandomEmptyCell(board);
@@ -373,7 +353,7 @@ function Start() {
 		false
 	);
 	interval = setInterval(UpdatePosition, 150);
-	ghost_interval = setInterval(UpdateGhostsPosition, 250);
+	ghost_interval = setInterval(UpdateGhostsPosition, 170);
 	interval_score = setInterval(UpdateScoreMove,150);
 
 }
@@ -406,8 +386,6 @@ function GetKeyPressed() {
 
 function Draw() {
 
-	// lblScore.value = score;
-	// lblTime.value = time_elapsed;
 	game_canvas_ctx.clearRect(0, 0, game_canvas_ctx.width, game_canvas_ctx.height); //clean board
 	DrawBaseOfInfoCanvas();
 	var icons_radius = 15;
@@ -415,7 +393,7 @@ function Draw() {
 	var points_radius = 5;
 
 	pac_color = "yellow";
-	var pac_eye_color = 'red';
+	var pac_eye_color = 'black';
 	for (var i = 0; i < cols; i++) {
 		for (var j = 0; j < rows; j++) {
 			var center = new Object();
@@ -497,13 +475,17 @@ function Draw() {
 				image.src = "images/pill.png";
 				game_canvas_ctx.drawImage(image,center.x-5 , center.y-5 , 20,20)
 			}
+			else if (board[i][j] == 30) {
+				game_canvas_ctx.beginPath();
+				let image = new Image();
+				image.src = "images/SmallClock.jpeg";
+				game_canvas_ctx.drawImage(image,center.x-5 , center.y-5 , 20,20)
+			}
+
 			else if (board[i][j] == 4) {
 				game_canvas_ctx.beginPath();
 				var wall= new Image();
 				wall.src="images/wall.png";
-				// game_canvas_ctx.rect(center.x - icons_radius, center.y - icons_radius, 2*icons_radius, 2*icons_radius);
-				// game_canvas_ctx.fillStyle = "white"; //color
-				// game_canvas_ctx.fill();
 				game_canvas_ctx.drawImage(wall,center.x-icons_radius, center.y -icons_radius, 2* icons_radius ,2* icons_radius )
 			}
 		}
@@ -547,9 +529,7 @@ function UpdateScoreMove() {
 	if (x == distdown && board[moveScore.i][moveScore.j+1] != 4)
 		moveScore.j++;
 }
-/**
- * line: 495, 519, 546,
- */
+
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
@@ -589,12 +569,19 @@ function UpdatePosition() {
 	}
 	if (board[shape.i][shape.j] == 20) {
 		pill_sticker();
-		// bonus_sticer();
-
 		if(lifes<5){
 			lifes++;
 		}
 		lives_flag = true;
+	}
+
+	if(board[shape.i][shape.j]==30)
+	{
+		start_time.setSeconds(start_time.getSeconds()+15)
+		moveScore.j=-1;
+		moveScore.i=-1;
+		clock_sticer();
+
 	}
 	if(shape.i==moveScore.i && shape.j==moveScore.j)
 	{
@@ -606,10 +593,6 @@ function UpdatePosition() {
 		bonus_flag=true;
 	}
 
-
-
-
-
 	for (var k = 0; k < ghostArr.length; k++) {
 		if (ghostArr[k].i==shape.i && ghostArr[k].j==shape.j) {
 			boom_sticker();
@@ -619,7 +602,7 @@ function UpdatePosition() {
 				lifes--;
 			}
 
-			if (lifes <= 0) {
+			if (lifes < 0) {
 				DrawBaseOfInfoCanvas();
 				game_over_sticker();
 				GameOverMessage();
@@ -654,10 +637,6 @@ function UpdatePosition() {
 	Draw();
 }
 
-
-/**
- *all
- */
 function bonus_sticer() {
 	bonus_flag = false;
 	$(document).ready(function(){
@@ -674,19 +653,15 @@ function bonus_sticer() {
 }
 
 
-/**
- *all
- */
+
 function game_over_sticker() {
 	$(document).ready(function(){
 		$('#gameover_image').fadeIn('slow', function () {
-			$('#gameover_image').delay(8000).fadeOut();
+			$('#gameover_image').delay(1600).fadeOut();
 		});
 	});
 }
-/**
- *all
- */
+
 function pill_sticker() {
 	$(document).ready(function(){
 		$('#bigPill_image').fadeIn('slow', function () {
@@ -695,9 +670,16 @@ function pill_sticker() {
 	});
 	lives_flag = false;
 }
-/**
- *all
- */
+
+function clock_sticer() {
+	$(document).ready(function(){
+		$('#bigClock_image').fadeIn('slow', function () {
+			$('#bigClock_image').delay(500).fadeOut();
+		});
+	});
+	lives_flag = false;
+}
+
 function boom_sticker() {
 	$(document).ready(function(){
 		$('#pacmanEaten').fadeIn('slow',function(){
@@ -713,18 +695,14 @@ function boom_sticker() {
 		});
 	});
 }
-/**
- *all
- */
+
 function win_sticer() {
 	$(document).ready(function(){
 		$('#win_image').fadeIn('slow', function () {
-			$('#win_image').delay(8000).fadeOut();
+			$('#win_image').delay(2000).fadeOut();
 		});
 	});
 }
-
-
 
 function UpdateGhostsPosition() {
 	var distsleft;
@@ -733,10 +711,10 @@ function UpdateGhostsPosition() {
 	var distdown;
 
 	for(var k=0 ; k<ghostArr.length; k++){
-		 distsleft=rows*cols;
-		 distright=rows*cols;
-		 distup=rows*cols;
-		 distdown=rows*cols;
+		distsleft=rows*cols;
+		distright=rows*cols;
+		distup=rows*cols;
+		distdown=rows*cols;
 
 		if(ghostArr[k].j> 0 && board[ghostArr[k].i][ghostArr[k].j-1] != 4 && noGhostOnThisPoint(ghostArr[k].i,ghostArr[k].j-1))
 			distup = Math.abs( ghostArr[k].i - shape.i) + Math.abs((ghostArr[k].j - 1) - shape.j);
@@ -752,9 +730,6 @@ function UpdateGhostsPosition() {
 
 		var minDist= Math.min(distright,distdown,distsleft,distup);
 
-		// var new_i = ghostArr[k].i;
-		// var new_j = ghostArr[k].j;
-
 		if(minDist == distsleft)
 			ghostArr[k].i --;
 		else if(minDist == distright)
@@ -763,12 +738,6 @@ function UpdateGhostsPosition() {
 			ghostArr[k].j--;
 		else if(minDist == distdown)
 			ghostArr[k].j++;
-
-		// ghostArr[k].i=new_i;
-		// ghostArr[k].j=new_j;
-
-
-
 
 	}
 }
@@ -785,8 +754,6 @@ function stopGame() {
 
 function locatePacmen() {
 	point = findRandomEmptyCell(board);
-	// while (!is_not_locked_point(point[0],point[1]))
-	// 	point = findRandomEmptyCell(board);
 	shape.i = point[0];
 	shape.j = point[1];
 

@@ -179,117 +179,12 @@ function set_random_colors(){
     document.getElementById("25points_color").value = color_25_points;
 }
 
-// function get_random_color() {
-//     // var letters = '0123456789ABCDEF';
-//     // var color = '#';
-//     // for (var i = 0; i < 6; i++) {
-//     //     color += letters[Math.floor(Math.random() * 16)];
-//     // }
-//     // return color;
-//     var randomColor = Math.floor(Math.random()*16777215).toString(16);
-//     return randomColor;
-//
-// }
-
 function set_random_time(){
-    time = Math.floor((Math.random())+1);
+    time = Math.floor(Math.random()*60000)+60;
     if (time < 60)
         time = time + 60;
     document.getElementById("time").value = time;
 }
-
-// function send_num_of_balls() {
-//     var balls_num = document.getElementById("num_of_balls").value;
-//     balls_num = parseInt(balls_num);
-//
-//     if (balls_num >= 50 && balls_num <= 90) {
-//         num_of_balls = balls_num;
-//         return true;
-//     }
-//
-//     else if (isNaN(balls_num) || balls_num > 90 || balls_num < 50) {
-//         alert("Number of balls should be between 50 and 90 !");
-//         return false;
-//     }
-//
-//
-//
-// }
-
-// function set_colors() {
-//     color_5_points = document.getElementById("5points_color").value;
-//     color_15_points = document.getElementById("15points_color").value;
-//     color_25_points = document.getElementById("25points_color").value;
-//
-//     return true;
-// }
-
-// function update_time() {
-//     var game_time = document.getElementById("time").value;
-//
-//     if (parseInt(game_time) >= 60) {
-//         time = game_time;
-//         return true;
-//     }
-//     else {
-//         alert("The time should be more between 60 !")
-//         return false;
-//     }
-// }
-// //
-// function update_ghost() {
-//     var ghost_num = document.getElementById("num_of_ghost").value;
-//
-//     if (parseInt(ghost_num) >= 1 && parseInt(ghost_num) <= 4) {
-//         ghosts_remain = ghost_num;
-//         return true;
-//     }
-//     else if (parseInt(ghost_num) < 1) {
-//         alert("Set at least 1 ghosts_remain !");
-//         return false;
-//     }
-//     else {
-//         alert("Set maximum 4 ghosts !");
-//         return false;
-//     }
-//
-// }
-
-// function put_random_values() {
-//     document.getElementById("leftKey").value = "Left Button"
-//     leftKey = 37;
-//     document.getElementById("upKey").value = "Up Button"
-//     upKey = 38;
-//     document.getElementById("rightKey").value = "Right Button"
-//     rightKey = 39;
-//     document.getElementById("downKey").value = "Down Button"
-//     downKey = 40;
-//
-//     document.getElementById("v_left").style.display = "block";
-//     document.getElementById("v_up").style.display = "block";
-//     document.getElementById("v_down").style.display = "block";
-//     document.getElementById("v_right").style.display = "block";
-//
-//     num_of_balls = Math.floor(Math.random() * (91 - 50 ) + 50);
-//     document.getElementById("num_of_balls").value = num_of_balls;
-//
-//     color_5_points = get_random_color();
-//     document.getElementById("5points_color").value = color_5_points;
-//
-//     color_15_points = get_random_color();
-//     document.getElementById("15points_color").value = color_15_points;
-//
-//     color_25_points = get_random_color();
-//     document.getElementById("25points_color").value = color_25_points;
-//
-//     time = Math.floor((Math.random())+1);
-//     if (time < 60)
-//         time = time + 60;
-//     document.getElementById("time").value = time;
-//
-//     ghosts_remain = Math.floor(Math.random() * 4) + 1;
-//     document.getElementById("num_of_ghost").value = ghosts_remain;
-// }
 
 /***
  * sent the settings data to start func

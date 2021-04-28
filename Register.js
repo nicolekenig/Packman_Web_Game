@@ -17,8 +17,8 @@ $( function() {
         name = $( "#name" ),
         email = $( "#email" ),
         password = $( "#password" ),
-        date = $( "#date" )
-    username = $("#Username ")
+        date = $( "#date" ),
+    username = $("#Username "),
     allFields = $( [] ).add( name ).add( email ).add( password ).add( date).add(username),
         tips = $( ".validateTips" );
 
@@ -86,7 +86,7 @@ $( function() {
                 "</tr>" );
 
             var newUser={
-                username: $("#username").val(),
+                username: $("#Username").val(),
                 name: $("#name").val(),
                 password: $("#password").val(),
                 email: $("#email").val(),
@@ -121,13 +121,6 @@ $( function() {
         event.preventDefault();
         addUser();
     });
-
-    // $( "#Registerbutton" ).button().on( "click", function() {
-    //   dialog.dialog( "open" );
-    // });
-    // $( "#RegisterButonWelcom" ).button().on( "click", function() {
-    //     dialog.dialog( "open" );
-    // });
 });
 
 function openDialog(){
