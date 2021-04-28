@@ -1,33 +1,44 @@
-var gameover;
-var closebutton;
+var game_over;
+var play_again;
 
 document.addEventListener('DOMContentLoaded', function (event) {
     // Get the modal
-    gameover = document.getElementById('GameOver');
+    game_over = document.getElementById('gameOver');
 
     // Get the <span> element that closes the modal
-    closebutton = document.getElementsByClassName("play_again")[0];
+    play_again = document.getElementsByClassName("play_again")[0];
 
-    closebutton.addEventListener("click",Start);
+    play_again.addEventListener("click", Start);
 });
-function openG() {
-    gameover.style.display = "block";
+
+function showGameOver() {
+    game_over.style.display = "block";
     window.clearInterval(interval);
-    window.clearInterval(interval_ghosts);
-    window.clearInterval(interval_nikud_zaz);
+    window.clearInterval(ghost_interval);
     interval.clearInterval();
-    // interval.clearInterval();
-    // interval_ghosts.clearInterval();
-    // interval_nikud_zaz.clearInterval();
-    // interval_sticker.clearInterval();
 }
 
-function closeG() {
-    gameover.style.display = "none";
-    showDiv('s' +
-        'ettings');
+function GameOverMessage() {
+
+    canves_info.style.visibility="hidden";
+    msg = "";
+    if (lifes == 0) {
+        msg = "Loser!";
+    }
+    else if(time_elapsed <= 0) {
+        if (score < 100) {
+            msg = "You are better than " + score.toString() + " points!";
+
+        }
+        else { //score > 100
+            msg = "Winner!!!";
+
+        }
+    }
+    else {
+        msg = "Winner!!!";
+
+    }
+    document.getElementById("message").innerHTML = msg;
+    showDiv("gameOver")
 }
-
-
-
-
