@@ -98,8 +98,8 @@ function get_num_of_balls(){
     if (balls_num >= 50 && balls_num <= 90)
         num_of_balls = balls_num;
 
-    else if (isNaN(balls_num) || balls_num > 90 || balls_num < 50)
-    alert("Number of balls should be between 50 and 90 !");
+    if (isNaN(balls_num) || balls_num > 90 || balls_num < 50)
+        alert("Number of balls should be between 50 and 90 !");
 
 }
 
@@ -190,6 +190,9 @@ function set_random_time(){
  * sent the settings data to start func
  */
 function get_values(){
+    get_num_of_ghosts();
+    get_num_of_balls();
+    get_time();
     num_of_balls = parseInt(document.getElementById("num_of_balls").value);
     ghosts_remain =  document.getElementById("num_of_ghost").value;
     color_5_points = document.getElementById("5points_color").value;
@@ -202,13 +205,17 @@ function get_values(){
 }
 function start_play() {
     get_values();
-    var balls_flag = (typeof (num_of_balls) != "undefined");
-    var color_point_flag = (typeof (color_5_points) != "undefined" || typeof (color_15_points) != "undefined" || typeof (color_25_points) != "undefined");
-    var ghost_flag = (typeof (ghosts_remain) != "undefined");
-    var time_flag = (typeof (time) != "undefined");
+    var balls_flag = (typeof (num_of_balls) != NaN);
+    var color_point_flag = (typeof (color_5_points) != "#fffff" && typeof (color_15_points) != "#fffff" && typeof (color_25_points) != "#fffff");
+    var ghost_flag = (typeof (ghosts_remain) != "");
+    var time_flag = (typeof (time) != "");
 
     if (balls_flag && color_point_flag && ghost_flag && time_flag) {
         showDiv('game')
+    }
+    else{
+        alert("Choose Settings for the Game");
+        return;
     }
 }
 
